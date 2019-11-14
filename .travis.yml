@@ -15,4 +15,4 @@ script:
   - docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro docker-ansible
 
   # Verify Ansible is available in the container.
-  - docker exec --tty test-container env TERM=xterm ansible --version
+  - docker exec -it test-container ansible --version
