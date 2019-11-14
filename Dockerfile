@@ -16,7 +16,7 @@ RUN apt-get update \
   && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
   && rm -rf /root/.cache/pip/ \
   && find / -name '*.pyc' -delete \
-  && find / -name '*__pycache__*' -delete
+  && find / -name '*__pycache__*' -delete \
   && apt-get clean
 
 COPY initctl_faker .
