@@ -5,6 +5,7 @@ ENV script_url "https://raw.githubusercontent.com/Dovry/ansible-install-script/m
 
 RUN apt-get update \
   && apt-get install -y wget locales \
+  rsyslog systemd systemd-cron sudo iproute2 \
   # Install ansible
   && wget $script_url \
   && chmod +x ansible_convenience_script.sh \
@@ -22,5 +23,5 @@ RUN apt-get update \
 COPY initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
 
-VOLUME ["/sys/fs/cgroup"]
-CMD ["/usr/lib/systemd/systemd"]
+VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
+CMD ["/lib/systemd/systemd"]
