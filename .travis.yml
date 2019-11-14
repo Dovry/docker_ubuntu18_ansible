@@ -8,6 +8,7 @@ before_install:
 
 script:
   # Test building Dockerfile.
+  - "travis_wait 20 sleep 1000 &" # increase timeout to 20 minutes
   - docker build -t docker-ansible .
 
   # Test running the container.
