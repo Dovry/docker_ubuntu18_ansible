@@ -5,10 +5,10 @@ before_install:
   # Upgrade Docker.
   - sudo apt-get update
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
-  - docker build --no-cache -t "$DOCKER_USERNAME"/${}:${TRAVIS_COMMIT} .
-  - docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro "$DOCKER_USERNAME"/${}:${TRAVIS_COMMIT}
+  - docker build --no-cache -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
+  - docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
 
 script:
   - docker exec -it test-container ansible --version
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push "$DOCKER_USERNAME"/${}:${TRAVIS_COMMIT}
+  - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
