@@ -1,11 +1,11 @@
 name: Publish Docker
-on: [push]
+on: [push,repository_dispatch]
 jobs:
   build_and_run:
     runs-on: ubuntu-latest
     steps:
     - name: Build container
-      run: docker build --no-cache -t ${GITHUB_REPOSITORY}:${GITHUB_SHA} .
+      run: docker build --no-cache -t "${GITHUB_REPOSITORY}":"${GITHUB_SHA}" .
 
     - name: Run container
       run: docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro ${GITHUB_REPOSITORY}:${GITHUB_SHA}
