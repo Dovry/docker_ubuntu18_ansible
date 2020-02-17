@@ -6,9 +6,7 @@ ENV script_url "https://raw.githubusercontent.com/dovry/ansible-install-script/m
 RUN apt-get update \
   && apt-get install -y --no-install-recommends wget \
   # Install ansible
-  && wget --no-check-certificate $script_url \
-  && chmod +x ansible_convenience_script.sh \
-  && sh ./ansible_convenience_script.sh -p \
+  && wget --no-check-certificate -O - $script_url | bash -s -- -p \
   && rm -f ansible_convenience_script.sh \
   # Cleanup
   && rm -rf /var/lib/apt/lists* \
